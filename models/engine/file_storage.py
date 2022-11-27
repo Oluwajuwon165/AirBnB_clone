@@ -29,7 +29,31 @@ class FileStorage:
             json.dump(d, f)
 
     def classes(self):
-        ""[v["__class__"]](**v)
+        """Returns a dictionary of valid classes and their references."""
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
+
+        classes = {"BaseModel": BaseModel,
+                   "User": User,
+                   "State": State,
+                   "City": City,
+                   "Amenity": Amenity,
+                   "Place": Place,
+                   "Review": Review}
+        return classes
+
+    def reload(self):
+        """Deserializes JSON file into __objects."""
+        if not os.path.isfile(FileStorage.__file_path):
+            return
+        with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+            obj_dict = json.load(f)
+            obj_dict = {k: self.classes()[v["__class__"]](**v)
                         for k, v in obj_dict.items()}
             # TODO: should this overwrite or insert?
             FileStorage.__objects = obj_dict
@@ -70,28 +94,4 @@ class FileStorage:
                          "user_id": str,
                          "text": str}
         }
-        return attributes"Returns a dictionary of valid classes and their references."""
-        from models.base_model import BaseModel
-        from models.user import User
-        from models.state import State
-        from models.city import City
-        from models.amenity import Amenity
-        from models.place import Place
-        from models.review import Review
-
-        classes = {"BaseModel": BaseModel,
-                   "User": User,
-                   "State": State,
-                   "City": City,
-                   "Amenity": Amenity,
-                   "Place": Place,
-                   "Review": Review}
-        return classes
-
-    def reload(self):
-        """Deserializes JSON file into __objects."""
-        if not os.path.isfile(FileStorage.__file_path):
-            return
-        with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
-            obj_dict = json.load(f)
-            obj_dict = {k: self.classes()
+        return attributes
