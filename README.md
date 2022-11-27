@@ -205,4 +205,5 @@ $ python3 unittest -m tests/test_console.py
 ```
 
 ## Authors :black_nib:
-* **KIPRONOH VINCENT** <[Vincent](https://github.com/KipronohVincent)>
+* **ABIDEMI OLUWASEYI** <[abidemi58](https://github.com/abidemi58)>
+* **OLUWAJUWON OLADITI** <[Oluwajuwon165](https://github.com/Oluwajuwon165)>
