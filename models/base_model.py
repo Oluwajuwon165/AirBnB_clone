@@ -14,7 +14,6 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Initialization of a Base instance.
-
         Args:
             - *args: list of arguments
             - **kwargs: dict of key-values arguments
